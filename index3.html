@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry & Proposal 💖</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+  }
+  h1 {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+    color: #fff;
+    text-shadow: 2px 2px #ff6b6b;
+  }
+  p {
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 1em;
+  }
+  button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+  }
+  button:hover {
+    background-color: #ff4757;
+  }
+  .hidden {
+    display: none;
+  }
+  #confetti div {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fall 3s linear forwards;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="stage1">
+  <h1>I'm Sorry 💔</h1>
+  <p>I made a mistake and I truly regret it. Will you forgive me?</p>
+  <button id="yes1">Yes 💖</button>
+  <button id="no1">No 😢</button>
+</div>
+
+<div id="stage2" class="hidden">
+  <h1>Will You Marry Me? 💍</h1>
+  <p>Choose wisely 😘</p>
+  <button id="yes2">Yes 💖</button>
+  <button id="no2">No 😢</button>
+</div>
+
+<div id="final" class="hidden">
+  <h1>Yay! ❤️</h1>
+  <p>You make me the happiest person alive. I promise to love you forever! 🥰</p>
+</div>
+
+<div id="confetti"></div>
+
+<script>
+  const no1 = document.getElementById('no1');
+  const yes1 = document.getElementById('yes1');
+  const stage1 = document.getElementById('stage1');
+  const stage2 = document.getElementById('stage2');
+  const yes2 = document.getElementById('yes2');
+  const no2 = document.getElementById('no2');
+  const final = document.getElementById('final');
+  const confettiDiv = document.getElementById('confetti');
+
+  // Make "No" buttons dodge the cursor
+  function dodgeButton(btn) {
+    btn.addEventListener('mouseenter', () => {
+      const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+      btn.style.position = 'absolute';
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+    });
+  }
+
+  dodgeButton(no1);
+  dodgeButton(no2);
+
+  // Stage 1 Yes
+  yes1.addEventListener('click', () => {
+    stage1.classList.add('hidden');
+    stage2.classList.remove('hidden');
+  });
+
+  // Stage 2 Yes
+  yes2.addEventListener('click', () => {
+    stage2.classList.add('hidden');
+    final.classList.remove('hidden');
+    launchConfetti();
+  });
+
+  // Launch confetti
+  function launchConfetti() {
+    for(let i=0; i<150; i++){
+      const confetti = document.createElement('div');
+      confetti.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 60%)`;
+      confetti.style.top = Math.random()*window.innerHeight + 'px';
+      confetti.style.left = Math.random()*window.innerWidth + 'px';
+      confettiDiv.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
